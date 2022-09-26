@@ -20,11 +20,7 @@ exports.getOneBooking = async (req, res) => {
 
     try{
 
-        const booking = await Booking.findOne({
-            _id: req.params.id
-        });
-
-        res.status(200).send(booking);
+        res.status(200).send(req.bookingInParams);
 
     }catch(err){
         console.log("Error while getting given one booking record", err.message);
@@ -80,7 +76,7 @@ exports.getOneBooking = async (req, res) => {
         req.bookingInParams.movieId = req.body.movieId != undefined ? req.body.movieId : req.bookingInParams.movieId;
         req.bookingInParams.noOfSeats = req.body.noOfSeats != undefined ? req.body.noOfSeats : req.bookingInParams.noOfSeats;
         req.bookingInParams.status = req.body.status != undefined ? req.body.status : req.bookingInParams.status;
-        req.bookingInParams.totalCost = req.body.totalCost != undefined ?  (req.bookedTheatre.ticketPrice * req.body.noOfSeats) : req.bookingInParams.totalCost;
+        req.bookingInParams.totalCost = parseInt(req.theatre.ticketPrice * req.body.noOfSeats);
     
         const updatedBookingObject = await req.bookingInParams.save();
     

@@ -4,7 +4,7 @@ const validateUserRequestBodies = require('./validateUserRequestBodies')
 const validateMovieRequestBodies = require('./validateMovieRequestBodies')
 const validateTheatreRequestBodies = require('./validateTheatreRequestBodies')
 const validatePaymentRequestBody = require('./validatePaymentRequestBody')
-const verifyBooking = require('./bookingReqBobyValidator')
+const verifyBooking = require('./bookingReqBodyValidator')
 
 module.exports = {
     authJwt,

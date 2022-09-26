@@ -148,42 +148,20 @@ const validateBookingBody = async (req, res, next) => {    //this validation its
 const validateUpdateBookingReqBody = async (req, res, next) => {
 
     try{
+        let bookings = req.bookingInParams;
+        if(bookings.status  == constants.bookingStatuses.inProgress){
+            
+            let theatre = await Theatre.findOne({
+                _id : req.bookingInParams.theatreId
+            });
+            req.theatre = theatre;
+            next();
 
-        if (req.body.bookingStatus){
-
-            const statusesAllowed = Object.values(constants.bookingStatuses)
-
-
-            if (req.user.userType == constants.userTypes.customer){
-
-                if (req.body.bookingStatus == constants.bookingStatuses.cancelled){
-
-                    if (req.bookingInParams.bookingStatus == constants.bookingStatuses.failed){
-
-                        return res.status(400).send({  //doubt
-
-                            message: "You can't change the status of the booking which is alraedy failed"
-                        });
-                    }
-                }else {
-
-                    return res.status(401).send({
-
-                        message: "only ADMIN can perform this action"
-                    });
-                }
-            }
-
-            if (!statusesAllowed.includes(req.body.bookingStatus)){
-
-                return res.status(400).send({
-
-                    message: "booking status provided is invalid"
-                });
-            }
+        }else{
+            res.status(400).send({
+                message : "only you can update when the bookings are in progress"
+            })
         }
-
-        next(); 
 
     }catch (err){
         console.log("error while validating the update booking req body", err.message);
@@ -194,7 +172,7 @@ const validateUpdateBookingReqBody = async (req, res, next) => {
     }
 }
 
-verifyBooking = {
+const verifyBooking = {
 
     validateBookingBody,
     validateUpdateBookingReqBody

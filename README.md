@@ -58,6 +58,19 @@ released in a single theatre using theatreId.
 
 <br/>
 
+## Installation
+this app requires [Node.js](https://nodejs.org/) v14+ to run.
+before running the application we required to one more application 
+[NotificationsService](https://github.com/sayyedaaman2/notificationService)
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd Movie_Booking_App
+npm install
+npm start 
+```
+<br/>
 ## REST API endpoints
 
 ### 1. Sign Up request
@@ -538,7 +551,7 @@ sample response body :
 
 ---
 
-### 8 Get single Movie
+### 9 Get single Movie
 ```sh
 GET /mba/api/v1/movie/:id
 Headers : 
@@ -588,4 +601,632 @@ sample response body :
 
 ---
 
+### 10 Create Theatre (TheatreOwner and Admin)
+```sh
+POST /mba/api/v1/theatres
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjIxMzUyLCJleHAiOjE2NjQyMjE0NzJ9.IqiNZVL21TPBqIC2go9y0wU8QT4Ru7aOjGIw2eOOgP0
 
+sample request body : 
+{
+    "ownerId": "63320698e236609a19c2f58e",
+    "name": "PVR LATUR",
+    "description": "full screen cinema",
+    "city": "Latur",
+    "pinCode": 41001,
+    "showTypes": [
+        "MORNING",
+        "EVENING",
+        "NIGHT"
+    ],
+    "numberOfSeats": 100,
+    "ticketPrice" : 150
+}
+
+sample response body : 
+{
+    "ownerId": "63320698e236609a19c2f58e",
+    "name": "PVR LATUR",
+    "description": "full screen cinema",
+    "city": "Latur",
+    "pinCode": 41001,
+    "showTypes": [
+        "MORNING",
+        "EVENING",
+        "NIGHT"
+    ],
+    "numberOfSeats": 100,
+    "movies": [],
+    "ticketPrice": 150,
+    "_id": "63320734e236609a19c2f59d",
+    "createdAt": "2022-09-26T20:10:28.473Z",
+    "updatedAt": "2022-09-26T20:10:28.473Z"
+}
+```
+
+---
+
+
+### 11 update Theatre (TheatreOwner and Admin)
+```sh
+PUT /mba/api/v1/theatres/:id
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjIxMzUyLCJleHAiOjE2NjQyMjE0NzJ9.IqiNZVL21TPBqIC2go9y0wU8QT4Ru7aOjGIw2eOOgP0
+
+Path Variables : 
+ id : 63320734e236609a19c2f59d
+sample request body : 
+{
+    "name" : "PVR",
+    "description" : "full screen cinema Hall",
+    "city" : "Pune",
+    "pinCode" : 410212,
+    "showTypes" : ["MORNING", "NOON", "EVENING", "NIGHT"],
+    "numberOfSeats" : 90,
+    "ticketPrice" : 180
+}
+
+sample response body : 
+{
+    "_id": "63320734e236609a19c2f59d",
+    "ownerId": "63320698e236609a19c2f58e",
+    "name": "PVR",
+    "description": "full screen cinema Hall",
+    "city": "Pune",
+    "pinCode": 410212,
+    "showTypes": [
+        "MORNING",
+        "NOON",
+        "EVENING",
+        "NIGHT"
+    ],
+    "numberOfSeats": 90,
+    "movies": [],
+    "ticketPrice": 180,
+    "createdAt": "2022-09-26T20:10:28.473Z",
+    "updatedAt": "2022-09-26T20:12:35.794Z"
+}
+```
+
+---
+
+### 12 delete Theatre (TheatreOwner and Admin)
+```sh
+PUT /mba/api/v1/theatres/:id
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjIxMzUyLCJleHAiOjE2NjQyMjE0NzJ9.IqiNZVL21TPBqIC2go9y0wU8QT4Ru7aOjGIw2eOOgP0
+
+Path Variables : 
+ id : 63320734e236609a19c2f59d
+sample request body : {}
+
+sample response body : 
+{
+    "message": "Theatre deleted"
+}
+```
+
+---
+
+### 13 Get all Theatres
+```sh
+GET /mba/api/v1/theatres
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjIxMzUyLCJleHAiOjE2NjQyMjE0NzJ9.IqiNZVL21TPBqIC2go9y0wU8QT4Ru7aOjGIw2eOOgP0
+
+sample request body : {}
+
+sample response body : 
+[
+    {
+        "_id": "6332066fe236609a19c2f575",
+        "ownerId": "6332066fe236609a19c2f572",
+        "name": "Theatre 1",
+        "description": "Description for theatre 1",
+        "city": "Mumbai",
+        "pinCode": 400049,
+        "showTypes": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "NIGHT"
+        ],
+        "numberOfSeats": 100,
+        "movies": [
+            "6332066fe236609a19c2f57b",
+            "6332066fe236609a19c2f57c"
+        ],
+        "ticketPrice": 145,
+        "createdAt": "2022-09-26T20:07:11.905Z",
+        "updatedAt": "2022-09-26T20:07:11.940Z"
+    },
+    {
+        "_id": "6332066fe236609a19c2f576",
+        "ownerId": "6332066fe236609a19c2f573",
+        "name": "Theatre 2",
+        "description": "Description for theatre 2",
+        "city": "Ahmedabad",
+        "pinCode": 380007,
+        "showTypes": [
+            "EVENING",
+            "NIGHT"
+        ],
+        "numberOfSeats": 50,
+        "movies": [],
+        "ticketPrice": 120,
+        "createdAt": "2022-09-26T20:07:11.906Z",
+        "updatedAt": "2022-09-26T20:07:11.906Z"
+    },
+    {
+        "_id": "6332066fe236609a19c2f577",
+        "ownerId": "6332066fe236609a19c2f573",
+        "name": "Theatre 3",
+        "description": "Description for theatre 3",
+        "city": "New Delhi",
+        "pinCode": 110031,
+        "showTypes": [
+            "EVENING"
+        ],
+        "numberOfSeats": 75,
+        "movies": [],
+        "ticketPrice": 235,
+        "createdAt": "2022-09-26T20:07:11.906Z",
+        "updatedAt": "2022-09-26T20:07:11.906Z"
+    }
+]
+```
+
+---
+
+### 14 Get single Theatre By theatreId
+```sh
+GET /mba/api/v1/theatres/:id
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjIxMzUyLCJleHAiOjE2NjQyMjE0NzJ9.IqiNZVL21TPBqIC2go9y0wU8QT4Ru7aOjGIw2eOOgP0
+
+Path Variables :
+ id : 6332066fe236609a19c2f577
+sample request body : {}
+
+sample response body : 
+{
+    "_id": "6332066fe236609a19c2f577",
+    "ownerId": "6332066fe236609a19c2f573",
+    "name": "Theatre 3",
+    "description": "Description for theatre 3",
+    "city": "New Delhi",
+    "pinCode": 110031,
+    "showTypes": [
+        "EVENING"
+    ],
+    "numberOfSeats": 75,
+    "movies": [],
+    "ticketPrice": 235,
+    "createdAt": "2022-09-26T20:07:11.906Z",
+    "updatedAt": "2022-09-26T20:07:11.906Z"
+}
+```
+
+---
+
+### 15 Get Movies in  Theatre
+```sh
+GET /mba/api/v1/theatres/:id/movies
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjIxMzUyLCJleHAiOjE2NjQyMjE0NzJ9.IqiNZVL21TPBqIC2go9y0wU8QT4Ru7aOjGIw2eOOgP0
+
+Path Variables :
+ id : 6332066fe236609a19c2f575
+sample request body : {}
+
+sample response body : 
+[
+    {
+        "_id": "6332066fe236609a19c2f57b",
+        "name": "Movie 1",
+        "description": "Description for movie 1",
+        "casts": [
+            "SomeOne",
+            "SomeOneElse"
+        ],
+        "trailerUrls": [
+            "TrailerURL"
+        ],
+        "posterUrls": [
+            "PosterURL"
+        ],
+        "languages": [
+            "English",
+            "Hindi"
+        ],
+        "releaseDate": "1970-01-01T00:00:02.002Z",
+        "releaseStatus": "COMING_SOON",
+        "imdbRating": 8.5,
+        "genre": [
+            "ACTION"
+        ],
+        "theatres": [
+            "6332066fe236609a19c2f575"
+        ],
+        "bookings": [
+            "6332066fe236609a19c2f582"
+        ],
+        "createdAt": "2022-09-26T20:07:11.929Z",
+        "updatedAt": "2022-09-26T20:07:11.981Z"
+    },
+    {
+        "_id": "6332066fe236609a19c2f57c",
+        "name": "Movie 2",
+        "description": "Description for movie 2",
+        "casts": [
+            "SomeOne",
+            "SomeOneElse"
+        ],
+        "trailerUrls": [
+            "TrailerURL"
+        ],
+        "posterUrls": [
+            "PosterURL"
+        ],
+        "languages": [
+            "English",
+            "Hindi"
+        ],
+        "releaseDate": "1970-01-01T00:00:02.004Z",
+        "releaseStatus": "COMING_SOON",
+        "imdbRating": 8.5,
+        "genre": [
+            "ACTION"
+        ],
+        "theatres": [
+            "6332066fe236609a19c2f575"
+        ],
+        "bookings": [],
+        "createdAt": "2022-09-26T20:07:11.929Z",
+        "updatedAt": "2022-09-26T20:07:11.947Z"
+    }
+]
+```
+
+---
+
+### 16 Add or Remove the movies on theatre
+```sh
+PUT /mba/api/v1/theatres/:id/movies
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjIxMzUyLCJleHAiOjE2NjQyMjE0NzJ9.IqiNZVL21TPBqIC2go9y0wU8QT4Ru7aOjGIw2eOOgP0
+
+Path Variables :
+ id : 63320a9ee236609a19c2f5ba
+sample request body : 
+{
+    "addMovies" :[
+        "6332066fe236609a19c2f57b"
+    ],
+    "removeMovies" : [
+        "631b666a7e2caa97cdf60184"
+    ]
+
+}
+
+sample response body : 
+{
+    "message": "Updated movies in theatre"
+}
+```
+
+---
+
+### 17 Booking the ticket
+```sh
+POST /mba/api/v1/bookings
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjIxMzUyLCJleHAiOjE2NjQyMjE0NzJ9.IqiNZVL21TPBqIC2go9y0wU8QT4Ru7aOjGIw2eOOgP0
+
+Path Variables :
+ id : 63320a9ee236609a19c2f5ba
+sample request body : 
+{
+    "theatreId" : "6332066fe236609a19c2f575",
+    "movieId" : "6332066fe236609a19c2f57b",
+    "noOfSeats" : 5
+}
+
+sample response body : 
+{
+    "totalCost": 725,
+    "theatreId": "6332066fe236609a19c2f575",
+    "movieId": "6332066fe236609a19c2f57b",
+    "userId": "63320698e236609a19c2f58e",
+    "ticketBookedTime": "2022-09-26T20:28:33.972Z",
+    "noOfSeats": 5,
+    "status": "IN_PROGRESS",
+    "_id": "63320b71e236609a19c2f5cc",
+    "createdAt": "2022-09-26T20:28:33.974Z",
+    "updatedAt": "2022-09-26T20:28:33.974Z"
+}
+```
+
+---
+
+### 18 Update Booking (user and admin only)
+```sh
+PUT /mba/api/v1/bookings/:id
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QyIiwiaWF0IjoxNjY0MjI1OTMyLCJleHAiOjE2NjQyMjYwNTJ9.MEbOibT61lt63A8mHD9DukvRgUFPOBR_2SIJmm_N3HE
+
+Path Variables :
+ id : 63320cbb0e89b5da70f1d164
+sample request body : 
+{
+    "noOfSeats" : 10
+}
+
+sample response body : 
+{
+    "_id": "63321b3add16ed73d477b5ad",
+    "totalCost": 1450,
+    "theatreId": "63320c45d9c8393eedcaad5e",
+    "movieId": "63320c45d9c8393eedcaad64",
+    "userId": "63320c740e89b5da70f1d158",
+    "ticketBookedTime": "2022-09-26T21:35:54.598Z",
+    "noOfSeats": 10,
+    "status": "IN_PROGRESS",
+    "createdAt": "2022-09-26T21:35:54.603Z",
+    "updatedAt": "2022-09-26T21:39:53.926Z"
+}
+```
+
+---
+
+### 19 get single Booking (user and admin only)
+```sh
+GET /mba/api/v1/bookings/:id
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QyIiwiaWF0IjoxNjY0MjI1OTMyLCJleHAiOjE2NjQyMjYwNTJ9.MEbOibT61lt63A8mHD9DukvRgUFPOBR_2SIJmm_N3HE
+
+Path Variables :
+ id : 63320cbb0e89b5da70f1d164
+sample request body : {}
+
+sample response body : 
+{
+    "_id": "63320cbb0e89b5da70f1d164",
+    "totalCost": 725,
+    "theatreId": "63320c45d9c8393eedcaad5e",
+    "movieId": "63320c45d9c8393eedcaad64",
+    "userId": "63320c740e89b5da70f1d158",
+    "ticketBookedTime": "2022-09-26T20:34:03.378Z",
+    "noOfSeats": 5,
+    "status": "IN_PROGRESS",
+    "createdAt": "2022-09-26T20:34:03.381Z",
+    "updatedAt": "2022-09-26T20:34:03.381Z"
+}
+```
+
+---
+
+### 20.1  get all  booking (only user can booked);
+```sh
+GET /mba/api/v1/bookings
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QyIiwiaWF0IjoxNjY0MjI1OTMyLCJleHAiOjE2NjQyMjYwNTJ9.MEbOibT61lt63A8mHD9DukvRgUFPOBR_2SIJmm_N3HE
+
+sample request body : {}
+
+sample response body : 
+[
+     {
+        "_id": "63321810c766c30c5df84d71",
+        "totalCost": 725,
+        "theatreId": "63320c45d9c8393eedcaad5e",
+        "movieId": "63320c45d9c8393eedcaad64",
+        "userId": "63320c740e89b5da70f1d158",
+        "ticketBookedTime": "2022-09-26T21:22:24.484Z",
+        "noOfSeats": 10,
+        "status": "IN_PROGRESS",
+        "createdAt": "2022-09-26T21:22:24.497Z",
+        "updatedAt": "2022-09-26T21:25:20.352Z"
+    },
+    {
+        "_id": "63321b3add16ed73d477b5ad",
+        "totalCost": 1450,
+        "theatreId": "63320c45d9c8393eedcaad5e",
+        "movieId": "63320c45d9c8393eedcaad64",
+        "userId": "63320c740e89b5da70f1d158",
+        "ticketBookedTime": "2022-09-26T21:35:54.598Z",
+        "noOfSeats": 10,
+        "status": "IN_PROGRESS",
+        "createdAt": "2022-09-26T21:35:54.603Z",
+        "updatedAt": "2022-09-26T21:39:53.926Z"
+    }
+]
+```
+
+---
+
+### 20.2  get all  booking (admin can get all booking);
+```sh
+GET /mba/api/v1/bookings
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoxNjY0MjI4NzI2LCJleHAiOjE2NjQyMjg4NDZ9.6py8qI_H-DOPPxwUlwt1AT3ThY0cUiqb6CDOmj-ZrMo
+
+sample request body : {}
+
+sample response body : 
+[
+    {
+        "_id": "63320c45d9c8393eedcaad6b",
+        "totalCost": 200,
+        "theatreId": "63320c45d9c8393eedcaad5e",
+        "movieId": "63320c45d9c8393eedcaad64",
+        "userId": "63320c45d9c8393eedcaad5a",
+        "ticketBookedTime": "2022-09-26T20:32:05.767Z",
+        "noOfSeats": 2,
+        "status": "COMPLETED",
+        "createdAt": "2022-09-26T20:32:05.768Z",
+        "updatedAt": "2022-09-26T20:32:05.768Z"
+    },
+    {
+        "_id": "63320cbb0e89b5da70f1d164",
+        "totalCost": 725,
+        "theatreId": "63320c45d9c8393eedcaad5e",
+        "movieId": "63320c45d9c8393eedcaad64",
+        "userId": "63320c740e89b5da70f1d158",
+        "ticketBookedTime": "2022-09-26T20:34:03.378Z",
+        "noOfSeats": 5,
+        "status": "IN_PROGRESS",
+        "createdAt": "2022-09-26T20:34:03.381Z",
+        "updatedAt": "2022-09-26T20:34:03.381Z"
+    },
+    {
+        "_id": "63321381657b0278037c9f6e",
+        "totalCost": 725,
+        "theatreId": "63320c45d9c8393eedcaad5e",
+        "movieId": "63320c45d9c8393eedcaad64",
+        "userId": "63320c740e89b5da70f1d158",
+        "ticketBookedTime": "2022-09-26T21:02:57.792Z",
+        "noOfSeats": 5,
+        "status": "IN_PROGRESS",
+        "createdAt": "2022-09-26T21:02:57.804Z",
+        "updatedAt": "2022-09-26T21:02:57.804Z"
+    },
+    {
+        "_id": "6332147f202a49e95b3633e3",
+        "totalCost": 725,
+        "theatreId": "63320c45d9c8393eedcaad5e",
+        "movieId": "63320c45d9c8393eedcaad64",
+        "userId": "63320c740e89b5da70f1d158",
+        "ticketBookedTime": "2022-09-26T21:07:11.296Z",
+        "noOfSeats": 10,
+        "status": "IN_PROGRESS",
+        "createdAt": "2022-09-26T21:07:11.309Z",
+        "updatedAt": "2022-09-26T21:09:25.834Z"
+    },
+    {
+        "_id": "63321810c766c30c5df84d71",
+        "totalCost": 725,
+        "theatreId": "63320c45d9c8393eedcaad5e",
+        "movieId": "63320c45d9c8393eedcaad64",
+        "userId": "63320c740e89b5da70f1d158",
+        "ticketBookedTime": "2022-09-26T21:22:24.484Z",
+        "noOfSeats": 10,
+        "status": "IN_PROGRESS",
+        "createdAt": "2022-09-26T21:22:24.497Z",
+        "updatedAt": "2022-09-26T21:25:20.352Z"
+    },
+    {
+        "_id": "63321b3add16ed73d477b5ad",
+        "totalCost": 1450,
+        "theatreId": "63320c45d9c8393eedcaad5e",
+        "movieId": "63320c45d9c8393eedcaad64",
+        "userId": "63320c740e89b5da70f1d158",
+        "ticketBookedTime": "2022-09-26T21:35:54.598Z",
+        "noOfSeats": 10,
+        "status": "IN_PROGRESS",
+        "createdAt": "2022-09-26T21:35:54.603Z",
+        "updatedAt": "2022-09-26T21:39:53.926Z"
+    }
+]
+```
+
+
+--
+
+### 21 Payment 
+```sh
+POST /mba/api/v1/payments
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QyIiwiaWF0IjoxNjY0MjI5MzUwLCJleHAiOjE2NjQyMjk0NzB9.zn9YSZOdZoH-6aBq86p-bDQH5SEuCbWNr5eqoRur_jU
+
+
+sample request body : 
+{
+    "bookingId" : "63321fee7d9482b48c504294",
+    "amount"  : 725,
+    "status" : "SUCCESS"
+}
+
+sample response body : 
+{
+    "bookingId": "63321fee7d9482b48c504294",
+    "amount": 725,
+    "status": "SUCCESS",
+    "_id": "633220007d9482b48c50429a",
+    "createdAt": "2022-09-26T21:56:16.369Z",
+    "updatedAt": "2022-09-26T21:56:16.369Z"
+}
+```
+
+---
+
+### 22 Get Single Payment 
+```sh
+GET /mba/api/v1/payments/:id
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QyIiwiaWF0IjoxNjY0MjI5MzUwLCJleHAiOjE2NjQyMjk0NzB9.zn9YSZOdZoH-6aBq86p-bDQH5SEuCbWNr5eqoRur_jU
+
+Path Variables :
+ id : 63321fee7d9482b48c504294
+
+sample request body : {}
+
+sample response body : 
+{
+    "_id": "633220f6faf68f29b21e81b0",
+    "bookingId": "633220e3faf68f29b21e81aa",
+    "amount": 725,
+    "status": "SUCCESS",
+    "createdAt": "2022-09-26T22:00:22.497Z",
+    "updatedAt": "2022-09-26T22:00:22.497Z"
+}
+```
+
+---
+
+### 23  Get All Payments 
+```sh
+GET /mba/api/v1/payments
+Headers : 
+ Content-Type : application/json
+ x-access-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QyIiwiaWF0IjoxNjY0MjI5MzUwLCJleHAiOjE2NjQyMjk0NzB9.zn9YSZOdZoH-6aBq86p-bDQH5SEuCbWNr5eqoRur_jU
+
+sample request body : {}
+
+sample response body : 
+[
+    {
+        "_id": "633220007d9482b48c50429a",
+        "bookingId": "63321fee7d9482b48c504294",
+        "amount": 725,
+        "status": "SUCCESS",
+        "createdAt": "2022-09-26T21:56:16.369Z",
+        "updatedAt": "2022-09-26T21:56:16.369Z"
+    },
+    {
+        "_id": "633220f6faf68f29b21e81b0",
+        "bookingId": "633220e3faf68f29b21e81aa",
+        "amount": 725,
+        "status": "SUCCESS",
+        "createdAt": "2022-09-26T22:00:22.497Z",
+        "updatedAt": "2022-09-26T22:00:22.497Z"
+    }
+]
+```
+
+###
+POSTMAN Collection [link](https://www.getpostman.com/collections/7f1e22b84529523427bb)
