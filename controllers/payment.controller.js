@@ -1,7 +1,6 @@
 const Payment = require("../models/payment.model");
 const constants = require("../utils/constants");
-const clinetConfig = require('../configs/client.config');
-const sendNotificationReq = require('../utils/notificationClient');
+const sendNotificationReq = require('../utils/sendEmailRequest')
 
 exports.getAllPayments = async (req, res) => {
     try{
@@ -41,13 +40,19 @@ exports.getOnePayment = async (req, res) => {
 
         const payment = await Payment.create(paymentObj);
 
-        req.booking.status = payment.status == constants.paymentStatuses.success ? constants.bookingStatuses.completed : constants.bookingStatuses.failed;
+        if(payment.status == constants.paymentStatuses.success){
+            req.booking.status = constants.bookingStatuses.completed
+            sendNotificationReq.sucessfulTicketPayment(req.user.email, payment)
+        }else{
+            req.booking.status = constants.bookingStatuses.failed
+            sendNotificationReq.failedTicketPayment(req.user.email, payment)
+        }
+
         await req.booking.save()
 
         req.user.myPayments.push(payment._id);
         await req.user.save();
 
-        await sendNotificationReq("Payment Successfuly MovieBooking", payment, req.user.email, clinetConfig.companyEmail);
         res.status(201).send(payment);
 
     }catch (err) {
