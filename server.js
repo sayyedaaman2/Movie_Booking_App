@@ -17,7 +17,7 @@ db.on("error", (err)=>{
 })
 db.once("open", ()=>{
     console.log(`___ Connected To MongoDB ___`);
-    //init();
+    init();
 })
 
 
