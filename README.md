@@ -71,7 +71,8 @@ npm install
 npm start 
 ```
 <br/>
-## REST API endpoints
+
+### REST API endpoints
 
 ### 1. Sign Up request
 
