@@ -60,7 +60,7 @@ released in a single theatre using theatreId.
 
 ## Installation
 this app requires [Node.js](https://nodejs.org/) v14+ to run.
-before running the application we required to one more application 
+before installing the application we required to one more application to Start
 [NotificationsService](https://github.com/sayyedaaman2/notificationService)
 
 Install the dependencies and devDependencies and start the server.
@@ -97,7 +97,7 @@ sample response body :
     "updatedAt": "2022-09-26T18:56:02.988Z"
 }
 ```
-Detials about the JSON structure
+Details about the JSON structure
 - name : Mandatory
 - userId : Mandatory + Unique
 - email : Mandatory + Unique
