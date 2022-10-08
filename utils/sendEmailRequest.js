@@ -36,3 +36,12 @@ exports.bookingPaymentTimedOut = (userEmail)=>{
     "Movie Booking App"
     );
 }
+
+exports.bookingPaymentInProcess = (userEmail)=>{
+    sendEmail(
+    `Movie booking Payment In Process`,
+    `Your booking has been complete the payment with time You can go to complete the payment ${notificationConfig.appURL}/mba/api/v1/paments`,
+    `${userEmail}`,
+    "Movie Booking App"
+    );
+}

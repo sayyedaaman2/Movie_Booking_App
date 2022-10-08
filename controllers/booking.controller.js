@@ -1,6 +1,7 @@
 const Booking = require("../models/booking.model");
 const constants = require("../utils/constants");
 const checker = require('../utils/checker');
+const sendNotificationReq = require('../utils/sendEmailRequest')
 
 exports.getAllBookings = async ( req, res) => {
 
@@ -54,7 +55,7 @@ exports.getOneBooking = async (req, res) => {
         await req.bookedMovie.save();
 
         res.status(201).send(booking);
-
+        sendNotificationReq.bookingPaymentInProcess(req.user.email)
         checker.checkBookingStatus(booking._id);
 
     }catch (err) {
